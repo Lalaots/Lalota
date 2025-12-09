@@ -31,8 +31,19 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
-ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = ['https://*']
+
+ALLOWED_HOSTS = [
+    "lalota.onrender.com",
+    "localhost",
+    "127.0.0.1"
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://lalota.onrender.com"
+]
+
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
 
 
 # Application definition
@@ -128,6 +139,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 
 
 
