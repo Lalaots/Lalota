@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Receipt</title>
+    <style>
+        body {
+            background: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 30px;
+            font-family: monospace;
+        }
+
+        .receipt-container {
+            width: 320px;
+            background: white;
+            padding: 20px;
+            border: 1px solid #ccc;
+            box-shadow: 0px 0px 5px rgba(0,0,0,0.2);
+        }
+
+        .receipt-header {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .receipt-header h2 {
+            margin: 0;
+        }
+
+        .line {
+            border-bottom: 1px dashed #000;
+            margin: 10px 0;
+        }
+
+        table {
+            width: 100%;
+            font-size: 14px;
+        }
+
+        table td {
+            padding: 3px 0;
+        }
+
+        .right {
+            text-align: right;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        .totals {
+            font-size: 15px;
+            margin-top: 10px;
+        }
+
+        .totals td {
+            padding: 4px 0;
+        }
+
+        .thank-you {
+            text-align: center;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        .barcode {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 18px;
+            letter-spacing: 3px;
+        }
+
+        .footer {
+            margin-top: 10px;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        .back-btn {
+            display: block;
+            padding: 8px 20px;
+            background: #000;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 14px;
+            margin: 20px auto 0 auto;
+        }
+
+        .back-btn:hover {
+            background: #444;
+        }
+    </style>
+</head>
+<body>
+
+<div class="receipt-container">
+
+    <div class="receipt-header">
+        <h2>STORE RECEIPT</h2>
+        <div>{{ sale.date_time }}</div>
+    </div>
+
+    <div class="line"></div>
+
+    <table>
+        <tr>
+            <td><strong>Product</strong></td>
+            <td class="right"><strong>Total</strong></td>
+        </tr>
+
+        {% for item in items %}
+        <tr>
+            <td>{{ item.product.name }} x{{ item.quantity }}</td>
+            <td class="right">{{ item.item_total }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <div class="line"></div>
+
+    <table class="totals">
+        <tr>
+            <td>Subtotal:</td>
+            <td class="right">{{ sale.subtotal }}</td>
+        </tr>
+        <tr>
+            <td>Tax:</td>
+            <td class="right">{{ sale.tax }}</td>
+        </tr>
+        <tr>
+            <td><strong>Total:</strong></td>
+            <td class="right"><strong>{{ sale.total }}</strong></td>
+        </tr>
+        <tr>
+            <td>Payment:</td>
+            <td class="right">{{ sale.payment }}</td>
+        </tr>
+        <tr>
+            <td>Change:</td>
+            <td class="right">{{ sale.change }}</td>
+        </tr>
+    </table>
+
+    <div class="line"></div>
+
+    <div class="thank-you">Thank You For Shopping!</div>
+
+    <div class="barcode">
+        ||| ||| | || |||| | |
+    </div>
+
+    <div class="footer">
+        No refunds after 7 days.<br>
+        Keep this receipt for your records.
+    </div>
+
+    <a href="{% url 'product_list' %}" class="back-btn">Go Back to Products</a>
+
+</div>
+
+</body>
+</html>
